@@ -1,10 +1,13 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 const Count = () => {
     const [text, setText] = useState("");
+    const [trimText, setTrimText] = useState("");
+    const [isChecked, setIsChecked] = useState(false);
+    
     const handleCopy = () => {
         navigator.clipboard.writeText(text);
         (document.getElementById("copy-button") as HTMLButtonElement).textContent = "copied";
@@ -27,15 +30,20 @@ const Count = () => {
         if (text !== "") {
             localStorage.setItem("text", text);
         }
+        setTrimText(text.replace(/\s+/g, ''));
     }, [text]);
     return (
         <div>
-            <p className="text-center m-10">Character count: {text.length}</p>
+            <p className="text-center mt-10">Character count: {isChecked ? text.length : trimText.length}</p>
+            <label className="block w-1/2 text-center mx-auto p-4">
+                <div id="container" className={`w-10 h-5 ${isChecked ? 'bg-green-300' : 'bg-gray-300'} rounded-full fixed cursor-pointer`} onClick={() => setIsChecked(!isChecked)}><div id="toggle" className={`w-5 h-5 bg-white rounded-full absolute left-0 top-0 transition-all duration-300 ${isChecked ? 'left-5' : 'left-0'}`}></div></div>
+                スペース、改行、タブをカウントする
+            </label>
             <textarea
                 value={text}
                 className="block w-4/5 min-h-[300px] h-auto mx-auto border-2 border-gray-300 rounded-md p-2"
                 placeholder="Enter your text here"
-                onChange={(e) => setText(e.target.value)}
+                onChange={(e) =>setText(e.target.value) }
             />
             <div className="w-4/5 mx-auto flex justify-center">
                 <div className="block w-[100px] mx-auto m-10 bg-blue-500 text-white p-2 rounded-md text-center">
