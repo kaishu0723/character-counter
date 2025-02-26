@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import BackspaceIcon from '@mui/icons-material/Backspace';
 
 const Count = () => {
     const [text, setText] = useState("");
@@ -18,6 +19,10 @@ const Count = () => {
 
     const handleClear = () => {
         setText("");
+    }
+
+    const handleRemove = () => {
+        setText(text.replace(/\s+/g, ''));
     }
 
     useEffect(() => {
@@ -54,6 +59,11 @@ const Count = () => {
                 <div className="block w-[100px] mx-auto m-10 bg-white text-blue-500 border-2 border-blue-500 p-2 rounded-md text-center">
                     <AutoAwesomeIcon />
                     <button onClick={handleClear} id="clear-button" className="pl-2">clear</button>
+                </div>
+                
+                <div className="block w-[130px] mx-auto m-10 bg-white text-blue-500 border-2 border-blue-500 p-2 rounded-md text-center">
+                    <BackspaceIcon className="relative bottom-[1px]"/>
+                    <button onClick={handleRemove} id="clear-button" className="pl-2">Remove</button>
                 </div>
             </div>
         </div>
