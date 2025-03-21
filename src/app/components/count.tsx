@@ -39,7 +39,7 @@ const Count = () => {
     }, [text]);
     return (
         <div>
-            <p className="text-center mt-10">Character count: {isChecked ? text.length : trimText.length}</p>
+            <p className="text-2xl text-center mt-10">Character count: {isChecked ? text.length : trimText.length}</p>
             <label className="flex p-4 justify-center">
                 <div id="container" className={`w-10 h-5 ${isChecked ? 'bg-green-300' : 'bg-gray-300'} rounded-full shadow-inner shadow-black/10 relative cursor-pointer mx-2`} onClick={() => setIsChecked(!isChecked)}>
                     <div id="toggle" className={`w-5 h-5 bg-white rounded-full absolute left-0 top-0 transition-all duration-300 ${isChecked ? 'left-5' : 'left-0'}`}>
